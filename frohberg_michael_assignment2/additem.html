@@ -1,8 +1,8 @@
 <!doctype html>
 <!--Michael Frohberg-->
-<!--VFW 1211-->
-<!--11/3/2012-->
-<!--Project 2-->
+<!--VFW-1212-->
+<!--11-27-2012-->
+<!--Project 1-->
 <!--additem.html-->
 <html>
 	<head>
@@ -11,66 +11,79 @@
 		<meta name="keywords" content="mobile development, html5, Full Sail University" />
 		<meta name="robots"	content="noindex, nofollow" />
 		<meta name="viewport" content="user-scalable=yes, width=device-width" />
-		<meta name="HandHeldFriendly" content="true" />
-		<meta name="MobileOptimized" content="320" />
-		<title>iVote</title>
+		<meta name="viewport" content="target-densitydpi-device-dpi" />
+		<title>iPlayDate</title>
 		<link rel="stylesheet" href="css/styles.css">	
 	</head>
 	<body>
-	<header>
-		<hgroup>
-			<h1>i<span>V</span>O<span>T</span>E</h1>
-			<h2>Let <span>YOUR VOICE</span> Be Heard</h2>
-		</hgroup>
-	</header> 
-		<form action="#" method="post" id="iVote">
-			<section>
-				<fieldset>
-					<legend>Required Information</legend>
-					<ul>
-							<li><label for="fname">First Name</label><input type="text" id="fname" class="box" /></li>          
-							<li><label for="lname">Last Name</label><input type="text" id="lname" class="box" /></li>	            
-							<li><label for="phone">Phone Number</label><input type="tel" id="phone" class="box" /></li>   	            															<li><label for="email">Email</label><input type="email" id="email" class="box" /></li>
-							<li><label for="date">Birthday</label><input type="date" id="date" class="box"/></li>
+		<h1>iPlayDate</h1>
+		<h2>Because Your Kids Don't Forget.</h2><br> 
+		<form action="#" method="post" id="iPlayDate">
+			<fieldset id="basicInfo">
+				<legend>Basic Information</legend>
+				<div class="input">
+					<div>PlayDater Name:</div><br>
+						<input type="text" id="kname" class="box" />          
+					<div>Parents Name</div><br>
+						<input type="text" id="pname" class="box" />            
+					<div>Parent Phone #:</div><br>
+						<input type="tel" id="phone" class="box" placeholder="123-456-7890" />    	            					<div>Parent E-mail:</div><br>
+						<input type="email" id="email" class="box" placeholder="aaa@bbb.com"/>
+					<div>PlayDate:</div><br>
+						<input type="date" id="date" class="box"/>					
+				</div>
+				<div class="schedule">
+					<label for="choice">Best Time During Week:</label><br>
+					<select id="choice">
+						<optgroup label="Time of Week">
+							<option value="Time of Week">--Time of Week--</option>
+							<option value="Weekdays">Weekdays</option>
+							<option value="Weekends">Weekends</option>
+						</optgroup>
+					</select>
+				</div>
+				<div class="schedule" id="select">Best Time of Day<br></div>
+			</fieldset>
+			<fieldset id="details">
+				<legend>Details</legend>
+				<div class="title">Boy or girl?</div>					
+					<ul class="radios">
+						<li><input type="radio" value="Boy" id="boy" name="sex" />
+							<label for="boy">Boy</label></li>
+						<li><input type="radio" value="Girl" id="girl" name="sex" />
+							<label for="girl">Girl</label></li>	      
+						<li><input type="radio" value="No Answer" id="no" name="sex" />
+							<label for="no">Prefer Not to Answer</label></li>	      						
 					</ul>
-				</fieldset>
-			</section>
-			<section>
-				<fieldset>
-				<legend>Vote Here</legend>
-					<p class="question">What is your party affiliation?</p>					
-						<ul>
-							<li><input type="radio" checked value="Democrat" id="dem" name="party" /><label for="dem">Democrat</label></li>
-							<li><input type="radio" value="Republican" id="rep" name="party" /><label for="rep">Republican</label></li>	      
-							<li><input type="radio" value="Independent" id="ind" name="party" /><label for="ind">Independent</label></li>	      												<li><input type="radio" value="None" id="none" name="party" /><label for="none">None</label></li>	      
-						</ul>
-					<p class="question">Which, if any, of these issues are important to you?</p>						
-						<ul>
-							<li><input type="checkbox" name="issue" value="Economy" id="economy" /><label for="economy">Economy</label></li>
-							<li><input type="checkbox" name="issue" value="Middle East" id="mideast" /><label for="mideast">Middle East</label></li>		      							<li><input type="checkbox" name="issue" value="Human Rights" id="human" /><label for="human">Human Rights</label></li>
-							<li><input type="checkbox" name="issue" value="Tax Cuts" id="taxcut" /><label for="taxcut">Tax Cuts</label></li>
-						</ul>
-					<p class="question">What is the most important factor in your decision?</p>
-						<ul>	
-							<li><textarea id="comments" class="comments"></textarea></li>
-						</ul>
-					<p class="question">Please Select Your Candidate:</p>
-						<ul>	
-							<li id="select">Choose Here<br></li>
-						</ul>
-					<p class="question">How confident are you in your candidate's odds?</p>
-						<ul>	
-							<li><label for="slider"><input id="slider" type="range" min="0" max="10" step="1" /></label><br></li>
-						</ul>
-					<nav>
-						<a href "#" id="clear">Clear Data</a>
-						<a href "#" id="display">Display Data"</a>
-						<a href "#" id="addnew" style="display:none">Add New Item</a>
-					</nav>		
-				</fieldset>
-						<input id="submit" class="myButton" type="button" value="Vote Now" />
-			</section>
+				<div class="title">Please check any that apply:</div>						
+					<ul class="check">
+						<li><input type="checkbox" value="Allergies" id="needs" />
+						<label for="allergy">Allergies?</label></li>
+						<li><input type="checkbox" value="Phobias" id="needs" />
+						<label for="phobia">Phobias?</label></li>		      															<li><input type="checkbox" value="Potty" id="needs" />
+						<label for="potty">Potty Trained?</label></li>
+						<li><input type="checkbox" value="Anxiety" id="needs" />
+						<label for="anxiety">Separation Anxiety? </label></li>
+						<li><input type="hidden" value="Special Needs" id="needs" /></li>									</ul>
+				<div class="title">Please elaborate if you checked any boxes:</div>
+					<ul>
+						<li><textarea id="comments" class="comments"></textarea></li>
+					</ul>
+				<div class="scale">On a scale of 1 - 10 How outgoing is your child?</div>
+					<ul>
+						<li><input id="outgoing" type="range" min="1" max="10" step="1" /></li>
+					</ul>
+				<div class="button"><input type="button" id="submit" value="Submit Info" /></div>
+			</fieldset><br>
+			<footer>
+				<nav class="navLinks">
+					<a href="#" id="clear" class="links">Clear Data </a>
+					<a href="#" id="display" class="links">Display Data</a>
+					<a href="#" id="addnew" style="display:none" class="links">Add New Item</a>
+				</nav>
+			</footer>
+			<script src="js/main.js" type="text/javascript"></script>	
 		</form>
-		<script src="js/main.js" type="text/javascript"></script>
-		</body>
-	</html>
+	</body>
+</html>
+
