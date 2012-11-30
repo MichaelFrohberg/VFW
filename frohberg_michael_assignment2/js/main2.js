@@ -25,13 +25,13 @@ window.addEventListener("DOMContentLoaded", function() {
 			}
 		}
 	}
-	function getIssues() {
-		var check = document.getElementById("issue");
+	function getCheckboxValues() {
+		var check = document.getElementById("needs");
 		for(var i=0; i<check.length; i++)
 			if(check[i].checked) {
-				issueChoices = check.value;
+				needsValue = check.value;
 			} else {
-					issueChoices = "None";
+					needsValue = "None";
 			}
 	}
 	function storeData() {
