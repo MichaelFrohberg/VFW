@@ -21,6 +21,7 @@
 		<form action="#" method="post" id="iPlayDate">
 			<fieldset id="basicInfo">
 				<legend>Basic Information</legend>
+				<ul id="errors"></ul>
 				<div class="input">
 					<div>PlayDater Name:</div><br>
 						<input type="text" id="kname" class="box" />          
@@ -53,22 +54,17 @@
 							<label for="boy">Boy</label></li>
 						<li><input type="radio" value="Girl" id="girl" name="sex" />
 							<label for="girl">Girl</label></li>	      
-						<li><input type="radio" value="No Answer" id="no" name="sex" />
-							<label for="no">Prefer Not to Answer</label></li>	      						
 					</ul>
-				<div class="title">Please check any that apply:</div>						
+				<div class="title">Special Needs:</div>						
 					<ul class="boxes">
-						<li><input type="checkbox" name="needs" value="Allergies"/> Allergies?</li>
-						<li><input type="checkbox" name="needs" value="Phobias"/> Phobias?</li>		      															
-						<li><input type="checkbox" name="needs" value="Potty"/> Potty Trained?</li>
-						<li><input type="checkbox" name="needs" value="Anxiety"/> Separation Anxiety?</li>
-						<li><input type="hidden" value="Special Needs" /></li>													
+						<li><input type="checkbox" id="allergies" name="allergy" value="Yes"/>Any Allergies?</li>
 					</ul>
-				<div class="title">Please elaborate if you checked any boxes:</div>
+					<input type="hidden" value="Special Needs" />													
+				<div class="title">If checked, please indicate what type:</div>
 					<ul>
 						<li><textarea id="comments" class="comments"></textarea></li>
 					</ul>
-				<div class="scale">On a scale of 1 - 10 How outgoing is your child?</div>
+				<div class="scale">On a scale of 1 - 10 How severe are the allergies?</div>
 					<ul>
 						<li><input id="outgoing" type="range" min="1" max="10" step="1" /></li>
 					</ul>
