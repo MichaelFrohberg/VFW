@@ -20,12 +20,12 @@ window.addEventListener("DOMContentLoaded", function() {
 			var optText = bestTimes[i];	
 			createOption.setAttribute("value", optText);
 			createOption.innerHTML = optText;
-			makeSelect.appendChild(createOption)		
+			makeSelect.appendChild(createOption);		
 		}
 		selectDiv.appendChild(makeSelect);
 	}
 	function getRadioValue (){
-		var radios = document.forms[0].sex
+		var radios = document.forms[0].sex;
 		for(var i=0; i<radios.length; i++) {
 			if(radios[i].checked){
 				sexValue = radios[i].value;
@@ -33,13 +33,11 @@ window.addEventListener("DOMContentLoaded", function() {
 		}
 	}
 	function getCheckboxValues() {
-		var check = document.getElementById("needs").checked
-		for(var i=0; i<check.length; i++)
-			if(check[i].checked) {
-				needsValue = check.checked;
-			} else {
-					needsValue = "None";
-			}
+		if($("needs").checked) {
+			needsValue = $("needs").value;
+		} else {
+				needsValue = "None";
+		}
 	}
 	function toggleControls(n) {
 		switch(n) {
@@ -71,12 +69,12 @@ window.addEventListener("DOMContentLoaded", function() {
 			 item.phone				= ["Phone #:", $("phone").value];
 			 item.email				= ["Email:", $("email").value];
 			 item.date				= ["Play Date:", $("date").value];
-			 item.sex				= ["Sex:", sexValue];
+			 item.sex					= ["Sex:", sexValue];
 			 item.choice			= ["Best Time of Week:", $("choice").value];
 			 item.select			= ["Best Time of Day:", $("dayTimes").value];
 			 item.needs				= ["Needs:", needsValue];
-			 item.comments			= ["Notes:", $("comments").value];
-			 item.outgoing			= ["How Outgoing? 1-10:", $("outgoing").value];
+			 item.comments		= ["Notes:", $("comments").value];
+			 item.outgoing		= ["How Outgoing? 1-10:", $("outgoing").value];
 		localStorage.setItem(id, JSON.stringify(item));
 		alert("Saved!");
 	}
@@ -92,6 +90,7 @@ window.addEventListener("DOMContentLoaded", function() {
 		document.body.appendChild(makeDiv);
 		for(var i=0, len=localStorage.length; i<len; i++) {
 			var makeLi = document.createElement("li");
+			makeLi.setAttribute("class", "list")		
 			makeList.appendChild(makeLi);
 			var key = localStorage.key(i);
 			var value = localStorage.getItem(key);
