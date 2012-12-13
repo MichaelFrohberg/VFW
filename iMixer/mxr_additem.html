@@ -12,17 +12,35 @@
 	<meta name="keywords" content="mobile development, html5, Full Sail University" />
 	<meta name="robots"	content="noindex, nofollow" />
 	<meta name="viewport" content="user-scalable=yes, width=device-width" />
-	<meta name="viewport" content="target-densitydpi-device-dpi" />
+	<meta name="viewport" content="target-densitydpi=device-dpi" />
 	<title>iMixr</title>
-	<link rel="stylesheet" href="css/styles_mxr.css">	
+	<link rel="stylesheet" href="css/styles_mxr.css">
+	<script src="js/json.js" type="text/javascript"></script>	
 	</head>
 	<body>
 		<h1>iMixr</h1>
 		<h2>a production sound app</h2><br>
+		<nav class="navLinks">
+			<a href="#" id="clear" class="links">Clear Data </a>
+			<a href="#" id="display" class="links">Display Data</a>
+			<a href="mxr_additem.html" id="addnew" style="display:none" class="links">Add New Item</a>
+		</nav>		
 		<form action="#" method="post" id="soundReport">
 			<fieldset id="projectInfo">
 				<legend>Project Information</legend>
 				<ul id="errors"></ul>
+					<div class="group">
+						<label for="group">Type of Project</label><br>
+						<select id="group">
+							<optgroup label="Project Type">
+								<option value="Select Type">--Select Project Type--</option>
+								<option value="Film">Film</option>
+								<option value="TV">TV</option>
+								<option value="Live">Live Event</option>
+								<option value="News">News</option>							
+							</optgroup>
+						</select>
+					</div>
 					<div class="input">
 						<div>Project Name:</div><br>
 						<input type="text" id="project" class="box" />
@@ -60,7 +78,7 @@
 				<div class="title">Frame Rate</div>	
 					<ul class="radios">
 						<li><input type="radio" value="23.97 FPS" id="23.97" name="frame" />
-                  <label for="24FPS">23.97 FPS</label></li>
+                  <label for="23.97FPS">23.97 FPS</label></li>
 						<li><input type="radio" value="24 FPS" id="24" name="frame" />
                   <label for="24FPS">24 FPS</label></li>
                   <li><input type="radio" value="25 FPS" id="25" name="frame" />
@@ -104,7 +122,7 @@
                      <div>Take Number:</div>
                      <li><input type="text" id="take" class="box" /></li>
                      <div>Scene Notes:</div>
-                     <li><textarea id="notes" class="notes"></textarea></li>
+                     <li><textarea id="notes" class="comments"></textarea></li>
 					  </ul>
                     <input type="hidden" value="Wild Track" />
                <div class="scale">Fader Level 1-10</div>
@@ -113,14 +131,7 @@
 						</ul>
 					<div class="button"><input type="button" id="submit" value="Submit Info" /></div>
 			</fieldset><br>
-			<footer>
-				<nav class="navLinks">
-					<a href="#" id="clear" class="links">Clear Data </a>
-					<a href="#" id="display" class="links">Display Data</a>
-					<a href="#" id="addnew" style="display:none" class="links">Add New Item</a>
-				</nav>
-			</footer>
-			<script src="js/main_mxr.js" type="text/javascript"></script>	
 		</form>
+		<script src="js/main_mxr.js" type="text/javascript"></script>	
 	</body>
 </html>

@@ -90,6 +90,9 @@ li {
 	list-style-type: square;
 	margin-bottom: 25px;
 }
-
+.things {
+	list-style-type: none;
+	
+}
 
 
