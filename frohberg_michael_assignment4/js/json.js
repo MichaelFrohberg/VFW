@@ -1,5 +1,6 @@
 var json = {
  "report1": {
+     "groups":			["Project Type:", "Film"],
      "project":		["Project Name:", "Top Chef Masters"],
      "production":	["Production Company:", "Magical Elves"],
      "contact":		["Production Contact:", "John Doe"],
@@ -26,6 +27,7 @@ var json = {
      "fader":        ["Fader Level:", "7"]
  },
  "report2": {
+     "groups":			["Project Type:", "TV"],     
      "project":      ["Project Name:", "Project Runway"],
      "production":   ["Production Company:", "Magical Elves"],
      "contact":      ["Production Contact:", "Jane Doe"],
@@ -52,6 +54,7 @@ var json = {
      "fader":        ["Fader Level:", "2"]
  },
  "report3": {
+     "groups":			["Project Type:", "News"],
      "project":      ["Project Name:", "Law & Order SVU"],
      "production":   ["Production Company:", "NBC Universal"],
      "contact":      ["Production Contact:", "Jordie Doe"],

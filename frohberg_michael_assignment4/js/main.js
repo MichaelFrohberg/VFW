@@ -3,51 +3,51 @@
 Project 4 - Forms
 iPlayDate - main.js
 */
-
 window.addEventListener("DOMContentLoaded", function() {
 	function $(x) {
 		var theValue = document.getElementById(x);
 		return theValue;
 	}
-//Build select element with options
+//		Build select element with options
 	function makeCats () {
 		var formTag = document.getElementsByTagName("form"),
 			 selectDiv = $("select"),
 			 makeSelect = document.createElement("select");
-			 makeSelect.setAttribute("id", "dayTimes");
-		for(var i=0, j=bestTimes.length; i<j; i++) {
-			var createOption = document.createElement("option");		
-			var optText = bestTimes[i];	
-			createOption.setAttribute("value", optText);
-			createOption.innerHTML = optText;
-			makeSelect.appendChild(createOption)		
+			 makeSelect.setAttribute("id", "groups");
+		for(var i=0, j=samples.length; i<j; i++) {
+			 var createOption = document.createElement("option");		
+			 var optText = samples[i];	
+			 createOption.setAttribute("value", optText);
+			 createOption.innerHTML = optText;
+			 makeSelect.appendChild(createOption);		
 		}
 		selectDiv.appendChild(makeSelect);
 	}
 	function getRadioValue (){
-		var radios = document.forms[0].sex
+		var radios = document.forms[0].frame;
 		for(var i=0; i<radios.length; i++) {
 			if(radios[i].checked){
-				sexValue = radios[i].value;
+				frameRate = radios[i].value;
 			}
 		}
 	}
 	function getCheckbox() {
-		var check = document.forms[0].allergy
-		if(check.checked) {
-				hasAllergy = check.value                                                                                                                 
+		if($("reftone").checked) {
+			refTone = $("reftone").value;														
+		} else {
+			refTone = "None";
 		}
 	}
 	function toggleControls(n) {
 		switch(n) {
 			case "on":
-				$("iPlayDate").style.display = "none";
+				$("soundReport").style.display = "none";
 				$("clear").style.display = "inline";
 				$("display").style.display = "none";
 				$("addnew").style.display = "inline";
 				break;
 			case "off":
-				$("iPlayDate").style.display = "block";
+				$("soundReport").style.display = "block";
 				$("clear").style.display = "inline";
 				$("display").style.display = "none";
 				$("addnew").style.display = "inline";
@@ -57,34 +57,54 @@ window.addEventListener("DOMContentLoaded", function() {
 				return false;
 		}
 	}
-// Local Storage Function - Stores name and and values from forms into an array
 	function saveData(key) {
-		if(!key){
-			var id 						= Math.floor(Math.random()*1000001);
-		}else{
+		if(!key) {
+			var id = Math.floor(Math.random()*1000001);
+		} else {
 			id = key;
 		}
 		getRadioValue ();
 		getCheckbox();
 		var item						= {};
-			 item.kname				= ["Kid's Name:", $("kname").value];
-			 item.pname				= ["Parent's Name:", $("pname").value];
-			 item.phone				= ["Phone #:", $("phone").value];
-			 item.email				= ["Email:", $("email").value];
-			 item.date				= ["Play Date:", $("date").value];
-			 item.sex				= ["Sex:", sexValue];
-			 item.choice			= ["Best Time of Week:", $("choice").value];
-			 item.select			= ["Best Time of Day:", $("dayTimes").value];
-			 item.allergies		= ["Allergies?:", hasAllergy];
-			 item.comments			= ["Notes:", $("comments").value];
-			 item.outgoing			= ["How Outgoing? 1-10:", $("outgoing").value];
+			 item.groups			= ["Project Type:", $("groups").value];
+			 item.project			= ["Project Name:", $("project").value];
+			 item.production		= ["Production Company:", $("production").value];
+			 item.contact			= ["Production Contact:", $("contact").value];
+			 item.cphone			= ["Contact Phone #:", $("cPhone").value];
+			 item.mixer				= ["Sound Mixer:", $("mixer").value];
+			 item.mphone			= ["Mixer Phone #:", $("mPhone").value];
+			 item.email				= ["Mixer Email:", $("email").value];
+			 item.date				= ["Shoot Date:", $("date").value];
+			 item.media				= ["Project Media:",$("media").value];
+			 item.select			= ["Sample Rate:", $("sampleRates").value];
+			 item.radios			= ["Frame Rate:", frameRate];
+			 item.box				= ["1khz Reference Tone:", refTone];
+			 item.track1			= ["Track 1:", $("track1").value];
+			 item.track2			= ["Track 2:", $("track2").value];
+			 item.track3			= ["Track 3:", $("track3").value];
+			 item.track4			= ["Track 4:", $("track4").value];
+			 item.track5			= ["Track 5:", $("track5").value];
+			 item.track6			= ["Track 6:", $("track6").value];
+			 item.track7			= ["Track 7:", $("track7").value];
+			 item.track8			= ["Track 8:", $("track8").value];
+			 item.scene				= ["Scene Number/Name:", $("scene").value];
+			 item.take				= ["Take Number/Name:", $("take").value];
+			 item.notes				= ["Scene/Take Notes:", $("notes").value];
+			 item.fader				= ["Fader Level:", $("fader").value];
 		localStorage.setItem(id, JSON.stringify(item));
-		alert("Saved!");
+		alert("Report Saved!");
 	}
+	function autoFillData(){
+		for(var n in json){
+			var id = Math.floor(Math.random()*1000001);		
+			localStorage.setItem(id, JSON.stringify(json[n]));
+		}
+	} 	
 	function getData() {
 		toggleControls("on");
 		if(localStorage.length === 0) {
-			alert("No Data Stored!");
+			alert("No data in local storage. Default form values were added.");
+			autoFillData();		
 		}
 		var makeDiv = document.createElement("div");
 		makeDiv.setAttribute("id", "items");
@@ -94,139 +114,205 @@ window.addEventListener("DOMContentLoaded", function() {
 		$("items").style.display = "block";
 		for(var i=0, len=localStorage.length; i<len; i++) {
 			var makeLi = document.createElement("li");
+			makeLi.setAttribute("class", "list");
 			var linksLi = document.createElement("li");
 			makeList.appendChild(makeLi);
 			var key = localStorage.key(i);
 			var value = localStorage.getItem(key);
-//Converting local storage string into an object
+//	  Converting local storage string into an object
 			var object = JSON.parse(value);
 			var makeSubList = document.createElement("ul");
 			makeLi.appendChild(makeSubList);
+			getImage(object.groups[1], makeSubList);
 			for(var n in object){
 				var makeSubLi = document.createElement("li");
+				makeSubList.setAttribute("class", "things")
 				makeSubList.appendChild(makeSubLi);
 				var optSubText = object[n][0]+" "+object[n][1];
 				makeSubLi.innerHTML = optSubText;
-				makeSubList.appendChild(linksLi)
+				makeSubList.appendChild(linksLi);
 			}
-			makeItemLinks(localStorage.key(i), linksLi);
+	//	create edit and delete links for local storage			
+			makeItemLinks(localStorage.key(i), linksLi); 
 		}
-		
 	}
+	function getImage(catName, makeSubList) {
+		var imageLi = document.createElement("li");
+		makeSubList.appendChild(imageLi);
+		var newImg = document.createElement("img");
+		var setSrc = newImg.setAttribute("src", "images/"+ catName + ".png");
+		imageLi.appendChild(newImg);
+	} 
+	function editItem(){
+		var value = localStorage.getItem(this.key);
+		var item = JSON.parse(value);
+		toggleControls("off");
+		$("groups").value = item.groups[1];
+		$("project").value = item.project[1];
+		$("production").value = item.production[1];
+		$("contact").value = item.contact[1];
+		$("cPhone").value = item.cphone[1];
+		$("mixer").value = item.mixer[1];
+		$("mPhone").value = item.mphone[1];
+		$("email").value = item.email[1];
+		$("date").value = item.date[1];
+		$("media").value = item.media[1];
+		$("sampleRates").value = item.select[1];
+		$("track1").value = item.track1[1];
+		$("track2").value = item.track2[1];
+		$("track3").value = item.track3[1];
+		$("track4").value = item.track4[1];
+		$("track5").value = item.track5[1];
+		$("track6").value = item.track6[1];
+		$("track7").value = item.track7[1];
+		$("track8").value = item.track8[1];		
+		$("scene").value = item.scene[1];		
+		$("take").value = item.take[1];		
+		$("notes").value = item.notes[1];
+		$("fader").value = item.fader[1];
+		var radios = document.forms[0].frame;		
+		for(var i=0; i<radios.length; i++) {
+			if(radios[i].value == "23.97 FPS" && item.radios[1] == "23.97 FPS"){
+				radios[i].setAttribute("checked", "checked");
+			}else if(radios[i].value == "24 FPS" && item.radios[1] == "24 FPS"){
+				radios[i].setAttribute("checked", "checked");
+			}else if(radios[i].value == "25 FPS" && item.radios[1] == "25 FPS"){
+				radios[i].setAttribute("checked", "checked");
+			}else if(radios[i].value == "29.97 FPS" && item.radios[1] == "29.97 FPS"){
+				radios[i].setAttribute("checked", "checked");
+			}else if(radios[i].value == "30 FPS" && item.radios[1] == "30 FPS"){
+				radios[i].setAttribute("checked", "checked");
+			}
+		}	
+		var box = document.forms[0].reftone
+		if(item.box[1] == "Yes") {
+			$("reftone").setAttribute("checked", "checked");
+		}
+//		remove save input initial event listener
+		save.removeEventListener("click", saveData);
+//		change submit button value to edit  to edit
+		$("submit").value = "Edit Report";
+		var editSubmit = $("submit");
+// 	key value established as property of editSubmit
+// 	so it can be used when data is saveData		
+		editSubmit.addEventListener("click", validate);
+		editSubmit.key = this.key;
+	}
+	function deleteItem (){
+		var ask = confirm("Are you positive you want to delete this entry?");
+		if(ask){
+			localStorage.removeItem(this.key);
+			alert("Entry deleted.")
+			window.location.reload();		
+		}else{
+			alert("Entry was not deleted.");
+		}
+	}
+// calling the json object, using it to populate empty forms	
+	
 	function makeItemLinks(key, linksLi) {
 		var editLink = document.createElement("a");
 		editLink.href = "#";
 		editLink.key = key;
-		var editText = "Edit Contact";
+		var editText = "Edit Report";
 		editLink.addEventListener("click", editItem);
 		editLink.innerHTML = editText;
 		linksLi.appendChild(editLink);
-		
 		var breakTag = document.createElement("br");
 		linksLi.appendChild(breakTag);
-		
 		var deleteLink = document.createElement("a");
 		deleteLink.href = "#";
 		deleteLink.key = key;
-		var deleteText = "Delete Contact";
+		var deleteText = "Delete Report";
 		deleteLink.addEventListener("click", deleteItem);
 		deleteLink.innerHTML = deleteText;
-		linksLi.appendChild(deleteLink)	
-	}
-	function editItem(){
-		var value = localStorage.getItem(this.key);
-		var item = JSON.parse(value)
-		toggleControls("off");
-		$("kname").value = item.kname[1];
-		$("pname").value = item.pname[1];
-		$("phone").value = item.phone[1];
-		$("email").value = item.email[1];
-		$("date").value = item.date[1];
-		for(var i=0; i<radios.length; i++) {
-			if(radios[i].value === "Boy" && item.sex[1] == "Boy"){
-				radios[i].setAttribute("checked", "checked");
-			}else if(radios[i].value == "Girl" && item.sex[1] == "Girl"){
-				radios[i].setAttribute("checked", "checked");
-			}
-		}	
-		$("choice").value = item.choice[1];		
-		$("dayTimes").value = item.select[1];		
-		if(item.allergies[1] == "Yes") {
-			$("allergies").setAttribute("checked", "checked");
-		}
-		$("comments").value[1] = item.comments[1];		
-		$("outgoing").value[1] = item.outgoing[1];				
-	
-		//remove save initial event listener
-		save.removeEventListener("click", storeData);
-		//change submit to edit
-		$("submit").value = "Edit Contact";
-		var editSubmit = $("submit");
-		editSubmit.addEventListener("click", validate);
-		editSubmit.key = this.key;
+		linksLi.appendChild(deleteLink);	
 	}	
-	function deleteItem (){
-		var ask = confirm("Are you sure you want to delete this PlayDate?");
-		if(ask){
-			localStorage.removeItem(this.key);
-			alert("Contact Deleted!");
-			window.location.reload();
-		}else{
-			alert("PlayDate was NOT deleted!");
-		}
-	} 
-	
+// creates edit and delete links
 	function clearLocal() {
 		if(localStorage.length === 0) {
 			alert("Nothing to Clear!");
 		} else {
-				localStorage.clear();
-				alert("Everything is Deleted!");
-				window.location.reload();
-				return false;
+			localStorage.clear();
+			alert("Everything is Deleted!");
+			window.location.reload();
+			return false;
 		}
-		
 	}
 	function validate(e){
-		var getKname = $("kname");
-		var getPname = $("pname");
+		var getGroup = $("groups");
+		var getProject = $("project");
+		var getProduction = $("production");
+		var getContact = $("contact");
+		var getCPhone = $("cPhone");
+		var getMixer = $("mixer");
 		var getEmail = $("email");
-		var getDayTimes = $("dayTimes");		
-		// error reset
+		var getMPhone = $("mPhone");
+		var getDate = $("date");		
+//		error reset
 		errMsg.innerHTML = "";
-		getKname.style.border = "1px solid black";
-		getPname.style.border = "1px solid black";
+		getGroup.style.border = "1px solid black";
+		getProject.style.border = "1px solid black";
+		getProduction.style.border = "1px solid black";
+		getContact.style.border = "1px solid black";
+		getCPhone.style.border = "1px solid black";
+		getMixer.style.border = "1px solid black";
+		getMPhone.style.border = "1px solid black";		
 		getEmail.style.border = "1px solid black";
-		getDayTimes.style.border = "1px solid black";
-		
-		// get error messages
-		var messageAry = []
-		// kid name
-		if(getKname.value === 0) {
-			var kNameError = "Please Enter a PlayDate.";
-			getKname.style.border = "1px solid red";
-			messageAry.push(kNameError);
+		getDate.style.border = "1px solid black";
+// 	get error messages
+		var messageAry = [];
+		if(getGroup.value === "") {
+			var groupError = "Please enter a project name.";
+			getGroup.style.border = "1px solid red";
+			messageAry.push(groupError);
 		}
-		// parent name
-		if(getPname.value === 0) {
-			var PNameError = "Please Enter Parent(s) Name."
-			getPname.style.border = "1px solid red";
-			messageAry.push(PNameError);
+		if(getProject.value === "") {
+			var projectError = "Please enter a project name.";
+			getProject.style.border = "1px solid red";
+			messageAry.push(projectError);
+		}
+// 	parent name
+		if(getProduction.value === "") {
+			var productionError = "Please enter a production company.";
+			getProduction.style.border = "1px solid red";
+			messageAry.push(productionError);
+		}
+		if(getContact.value === "") {
+			var contactError = "Please enter a production contact.";
+			getContact.style.border = "1px solid red";
+			messageAry.push(contactError);
 		}	
-		// email
-		var re = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+		if(getCPhone.value === "") {
+			var cPhoneError = "Please enter a production phone number.";
+			getCPhone.style.border = "1px solid red";
+			messageAry.push(cPhoneError);
+		}	
+		if(getMixer.value === "") {
+			var mixerError = "Please enter a mixer name.";
+			getMixer.style.border = "1px solid red";
+			messageAry.push(mixerError);
+		}		
+		if(getMPhone.value === "") {
+			var mPhoneError = "Please enter a production phone number.";
+			getMPhone.style.border = "1px solid red";
+			messageAry.push(mPhoneError);
+		}		
+// 	email
+		var re = /^([a-zA-Z0-9_\.\-])+\@(([a-zA-Z0-9\-])+\.)+([a-zA-Z0-9]{2,4})+$/;
 		if(!(re.exec(getEmail.value))){
 			var emailError = "Please enter a valid email address.";
 			getEmail.style.border = "1px solid red";
 			messageAry.push(emailError);
 		}	
-		// time of day
-		if(getDayTimes.value === "--Time of Day--") {
-			var dayTimesError = "Please choose a time of day.";
-			getDayTimes.style.border = "1px solid red";
-			messageAry.push(dayTimesError);
-		}
-		if (messageAry.length >= 1){
+		if(getDate.value === "") {
+			var getDateError = "Please enter a date.";
+			getDate.style.border = "1px solid red";
+			messageAry.push(getDateError);
+		}	
+		
+//		display any errors on screen
+		if (messageAry.length >= 1) {
 			for(var i=0, j=messageAry.length; i<j; i++) {
 				var txt = document.createElement("li");
 				txt.innerHTML = messageAry[i];
@@ -235,30 +321,26 @@ window.addEventListener("DOMContentLoaded", function() {
 			e.preventDefault();
 			return false;
 		} else {
-		// save if all is well
 			saveData(this.key);
 		}
+		
 	}
-
-	
-//variables
-	var bestTimes = ["--Time of Day--", 
-								"Mornings", 
-								"Early Afternoon", 
-								"Late Afternoon", 							  
-								"Evenings"],
-		sexValue,
-		hasAllergy = "No";
-		errMsg = $("errors"); 
-	makeCats ();
-	//Links and Submit Button
+// 	variables
+	var samples = ["Choose...", 
+					"Film", 
+					"TV",
+					"Live Event",
+					"News"],
+		frameRate,
+		refTone = "No",
+		errMsg = $("errors");
+	makeCats(); 
+//		Links and Submit Button
 	var displayData = $("display");
 	displayData.addEventListener("click", getData);
 	var clearData = $("clear");
 	clearData.addEventListener("click", clearLocal);
-	var submitData = $("submit");
-	submitData.addEventListener("click", validate);
-	
-
+	var save = $("submit");
+	save.addEventListener("click", validate);
 });
 
